@@ -7,6 +7,8 @@
     <title>Code Quiz</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  
 
 
 </head>
@@ -14,28 +16,34 @@
 
 
 
-<body class="container">
+<body class="container background">
+<div class="wrapper">
  
     <!-- View Highscores and Time -->
     
     <div class = "row">
-            <div class= "col-sm-6 text-left mt-2 display-5"><button type="button" class="btn btn-link">View Highscores</button></div>
-            <div class = "col-sm-6 text-right mt-2 display-5">Time = 0</div>
+            <div class= "col-sm-6 text-left p-3"><button type="button" class="btn btn-link">View Highscores</button></div>
+            <span class = "col-sm-6 mt-3 text-right">Time = <span id="time">0</span></span>
             </div>  
-    
+
+
+    <!-- Quiz -->
+
+    <div class="Quiz"></div>
+
     <!-- Main Header -->
     
-    <div class="row">
+    <div class="row p-2 m-2" id="header">
            
             <div class ="col-sm-4"></div>
-            <div class = "col-sm-4 text-center mt-5 display-4 jumbotron font-weight-bold">Capital Challenge</div>
+            <div class = "col-sm-4 text-center jumbotron h1 font-weight-bold">Capital Challenge</div>
             <div class ="col-sm-4"></div>
 
     </div>
 
     <!-- Description  -->
 
-    <div class="row">
+    <div class="row" id="description">
            
             <div class ="col-sm-2"></div>
             <div class = "col-sm-8 text-center mt-5 display-5 font-weight-bold">
@@ -55,7 +63,9 @@
     <div class="quiz"></div>
     </div>  
 
-    
-
+        <div class="push"></div>
+</div>
+<footer class="footer"></footer>   
+<script src="script.js"></script>
 </body>
 </html>
