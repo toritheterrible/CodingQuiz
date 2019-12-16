@@ -38,12 +38,35 @@ gameOver.setAttribute("src", "gameover.wav");
 
 console.log(finalScore)
 
+function highScoresList () {
+  localStorage.setItem(
+    "highScores",
+  
+    JSON.stringify({
+     highScores: finalScore
+      
 
+    })
+  );
+}
+
+function submitScoreIntList () {
+  localStorage.setItem(
+    "initials",
+  
+    JSON.stringify({
+      initials: submitScoreInt
+      
+
+    })
+  );
+}
 
 
 $("button").on("click", function () {
   var highScoresList = localStorage.getItem("highScores");
-  highScoreDiv = $("<div>" + highScoresList +  "</div>") 
+var submitScore = localStorage.getItem("initials");
+  highScoreDiv = $("<div>" + highScoresList + "<span>" +submitScore +  "</span>" +  "</div>") 
   $("#highScoreDiv1").append(highScoreDiv)
   $("#high").addClass("disabled")
 console.log(highScoresList)
@@ -51,14 +74,16 @@ console.log(highScoresList)
 
 })
 
-var timesUp;
-totalSeconds = 75;
-secondsElapsed = 0;
-timePenalty = 15;
+
+
+
 
 $("#quizButton").on("click", function() {
   function countDown() {
- 
+    var timesUp;
+    totalSeconds = 75;
+    secondsElapsed = 0;
+    timePenalty = 15;
     var timesUp = setInterval(function () {
       var secondsLeft = totalSeconds - secondsElapsed
         $("#time").text(secondsLeft);
@@ -71,28 +96,42 @@ $("#quizButton").on("click", function() {
         $(".Quiz").text("");
         // gameOver.play();
         finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
-        initialHighScores = $(`<input class="form-control submitScore" type="text" placeholder="Your initials please">`)
-        submitScoreButton = $(`<button type="button" class="btn btn-primary btn-sm">Small button</button>`)
+        initialHighScores = $(`<input class="form-control initials" type="text" placeholder="Your initials please">`)
+        submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
         $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
+      
+        
+       $(".submitScore").on("click", function() {
+        
+        submitScoreInt = document.querySelector(".initials").value
+        submitScoreIntList();
+        highScoresList();
+        $(".Quiz").text("");
+        $( "#header" ).removeClass("d-none");
+        $( "#description" ).removeClass("d-none");
+        $("#quizButton").removeClass("d-none");
+        })
+       
     
       
-    //  $(".submitScore").on("submit", function() {
-    //   submitScoreInt = document.getElementsByClassName("submitScore").textContent
-    //   console.log(submitScoreInt)
       
-    // })
+      
+    
+      
+    
     
         }
     }, 1000);
   }
   
-      countDown();
+      
     
   
   $( "#header" ).addClass("d-none");
   $( "#description" ).addClass("d-none");
-  $("#quizButton").remove();
-
+  $("#quizButton").addClass("d-none");
+  countDown();
+  
 question1 = $("<ul>" + questions[0].title + "</ul>");
 $(".Quiz").append(question1)
 
@@ -315,7 +354,7 @@ function fifthQuestionFun() {
 $("li").addClass("choices");
 
 $("li").on("click", function fifthQuestionFun2(a) {
- 
+
   
   if (a.target.textContent === questions[4].answer)
   
@@ -336,16 +375,14 @@ $("li").on("click", function fifthQuestionFun2(a) {
     $(".Quiz").text("");
     gameOver.play();
     finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
-    initialHighScores = $(`<input class="form-control submitScore" type="text" placeholder="Your initials please">`)
-    submitScoreButton = $(`<button type="button" class="btn btn-primary btn-sm">Small button</button>`)
+    initialHighScores = $(`<input class="form-control initials" type="text" placeholder="Your initials please">`)
+    submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
     $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
-    // $(".Quiz").append(initialHighScores)
+  
     
-  //  $(".submitScore").on("submit", function() {
-  //   submitScoreInt = document.getElementsByClassName("submitScore").textContent
-  //   console.log(submitScoreInt)
-    highScoresList();
-  // })
+   
+    
+
   
   
   }
@@ -356,23 +393,30 @@ $("li").on("click", function fifthQuestionFun2(a) {
     $(".Quiz").text("");
     gameOver.play();
     finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
-    initialHighScores = $(`<input class="form-control" type="text" placeholder="Your initials please">`)
+    initialHighScores = $(`<input class="form-control initials" type="text" placeholder="Your initials please">`)
     submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
     $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
   
     
-   $(".submitScore").on("click", function() {
-    submitScoreInt = document.getElementsByClassName("submitScore").textContent
-    console.log(submitScoreInt)
-    highScoresList();
-  })
-    
    
+
     
 
   
   }
-  
+  $(".submitScore").on("click", function() {
+   
+    submitScoreInt = document.querySelector(".initials").value
+    submitScoreIntList();
+    highScoresList();
+    alert("Now Back to the Main Menu");
+    $(".Quiz").text("");
+    $( "#header" ).removeClass("d-none");
+    $( "#description" ).removeClass("d-none");
+    $("#quizButton").removeClass("d-none");
+   location.reload(); 
+   
+    })
 }
 
 
@@ -380,18 +424,12 @@ $("li").on("click", function fifthQuestionFun2(a) {
 )};
 
 
-function highScoresList () {
-  localStorage.setItem(
-    "highScores",
-    JSON.stringify({
-      highScores: finalScore
-    })
-  );
-}
 
 
-clearInterval(timesUp);
-timesUp = 0;
+
+
+
+
 
 
 
