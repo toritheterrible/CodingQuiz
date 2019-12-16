@@ -1,18 +1,21 @@
 #quizButton {
-    background-color: gainsboro;
+    background-color: whitesmoke;
     font-weight: bolder;
     cursor: pointer;
-    color: cadetblue;
+    color: rgb(9, 44, 44);
     border-radius: 1rem;    
+    border: 2px solid black;
+    
 }
 
 #quizButton:hover {
-    background-color: wheat;
+    background-color: rgb(243, 208, 7);
+    color: black;
 
 }
 
 .choices:hover {
-    background-color: thistle
+    background-color:  rgb(243, 208, 7)
 }
 
 /* sticky footer */
@@ -36,7 +39,45 @@ html, body {
   /*  */
 
   .background {
-      background-image: url(https://cdn.getyourguide.com/img/tour_img-509746-146.jpg);
+      background-image: url(https://vastphotos.com/files/uploads/photos/10505/high-resolution-photo-of-us-capitol-xl.jpg);
       background-repeat: space;
       background-size: cover;
+  }
+
+  #background {
+    background-image: linear-gradient(to bottom right, white, skyblue);
+      border-radius: .5rem;
+      border: 1px black solid;
+      padding: 1rem;
+      line-height: 200%;
+  }
+
+  ul {
+margin-top: 100px;
+background-color: whitesmoke;
+padding: 20px;
+border: 1px black solid;
+border-radius: .5rem;
+
+  }
+
+  li {
+    padding: 20px;
+    border: 1px black solid;
+    border-radius: .5rem;
+    background-color: rgba(245, 245, 245, 0.753);
+  }
+
+  body {
+    font-family: 'Girassol', cursive;
+
+  }
+
+  #high {
+      color: white;
+  }
+
+  #highScoreDiv1 {
+      z-index: 1;
+      background-color: white;
   }

@@ -27,31 +27,71 @@ var questions = [
     ];
 
 var finalScore = 0;
-var b = 75
-var int
+var correctA = document.createElement("audio");
+correctA.setAttribute("src", "smw_1-up.wav");
+var inCorrectA = document.createElement("audio");
+inCorrectA.setAttribute("src", "smw_blargg.wav");
+var gameOver = document.createElement("audio");
+gameOver.setAttribute("src", "gameover.wav");
+// var b = document.body.querySelector("#time").textContent;
 
 
+console.log(finalScore)
+
+
+
+
+$("button").on("click", function () {
+  var highScoresList = localStorage.getItem("highScores");
+  highScoreDiv = $("<div>" + highScoresList +  "</div>") 
+  $("#highScoreDiv1").append(highScoreDiv)
+  $("#high").addClass("disabled")
+console.log(highScoresList)
+
+
+})
+
+var timesUp;
+totalSeconds = 75;
+secondsElapsed = 0;
+timePenalty = 15;
 
 $("#quizButton").on("click", function() {
-  
-  function countDown(b) {
-  
-          var int = setInterval(function () {
+  function countDown() {
+ 
+    var timesUp = setInterval(function () {
+      var secondsLeft = totalSeconds - secondsElapsed
+        $("#time").text(secondsLeft);
         
-              $("#time").text(b);
-              
-              b--; 
-              if(b <= -1) {
-              clearInterval(int);
-              }
-          }, 1000);
-      }
-      countDown(b);
+        secondsElapsed++; 
+  
+  
+        if(secondsLeft === 0) {
+        clearInterval(timesUp);
+        $(".Quiz").text("");
+        // gameOver.play();
+        finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
+        initialHighScores = $(`<input class="form-control submitScore" type="text" placeholder="Your initials please">`)
+        submitScoreButton = $(`<button type="button" class="btn btn-primary btn-sm">Small button</button>`)
+        $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
+    
+      
+    //  $(".submitScore").on("submit", function() {
+    //   submitScoreInt = document.getElementsByClassName("submitScore").textContent
+    //   console.log(submitScoreInt)
+      
+    // })
+    
+        }
+    }, 1000);
+  }
+  
+      countDown();
     
   
   $( "#header" ).addClass("d-none");
   $( "#description" ).addClass("d-none");
-$("#quizButton").remove();
+  $("#quizButton").remove();
 
 question1 = $("<ul>" + questions[0].title + "</ul>");
 $(".Quiz").append(question1)
@@ -64,25 +104,38 @@ $(".Quiz").append(answersA1)
 $(".Quiz").append(answersA2)
 $(".Quiz").append(answersA3)
 $(".Quiz").append(answersA4)
-$("ul").addClass("list-group card-header text-center border-dark");
-$("li").addClass("list-group-item btn");
+
+
 $("li").addClass("choices");
 
 
-$("li").on("click", function firstQuestionFun(p) {
- 
-  if (p.target.textContent === questions[0].answer)
+$("li").on("click", function firstQuestionFun(a) {
+  b = document.body.querySelector("#time").textContent
+  if (a.target.textContent === questions[0].answer)
   {
+    correctA.play();
     alert("Correct")
-    finalScore+= 15;
-    console.log(finalScore);
+    
+    if (secondsElapsed < 10) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 12) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 15) {
+      finalScore+= 5;
+    }
+console.log(finalScore)
+    
+  
     $(".Quiz").text("")
     secondQuestionFun();
   }
   else {
+    inCorrectA.play();
     alert("Incorrect");
+ 
     $(".Quiz").text("")
-
     secondQuestionFun();
 
   }
@@ -91,8 +144,8 @@ $("li").on("click", function firstQuestionFun(p) {
 });
 function secondQuestionFun() {
 
-  question1 = $("<ul>" + questions[1].title + "</ul>");
-  $(".Quiz").append(question1)
+  question2 = $("<ul>" + questions[1].title + "</ul>");
+  $(".Quiz").append(question2)
   
   answersB1 = $("<li>" + questions[1].choices[0] + "</li>");
   answersB2 = $("<li>" + questions[1].choices[1] + "</li>");
@@ -102,25 +155,36 @@ function secondQuestionFun() {
   $(".Quiz").append(answersB2)
   $(".Quiz").append(answersB3)
   $(".Quiz").append(answersB4)
-  $("ul").addClass("list-group card-header text-center border-dark");
-$("li").addClass("list-group-item btn");
+
 $("li").addClass("choices");
 
 $("li").on("click", function secondQuestionFun2(a) {
-  console.log(secondQuestionFun2)
+  
   
   if (a.target.textContent === questions[1].answer)
   
   {
+    correctA.play();
     alert("Correct")
-    finalScore+= 15;
-    console.log(finalScore);
+
+    if (secondsElapsed < 10) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 12) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 15) {
+      finalScore+= 5;
+    }
+    console.log(finalScore)
     $(".Quiz").text("")
      thirdQuestionFun();
   }
   
   else {
-    alert("Incorrect");
+    inCorrectA.play();
+    alert("Incorrect"); 
+    
     $(".Quiz").text("")
     thirdQuestionFun();
     
@@ -133,8 +197,8 @@ $("li").on("click", function secondQuestionFun2(a) {
 
 function thirdQuestionFun() {
   
-  question1 = $("<ul>" + questions[2].title + "</ul>");
-  $(".Quiz").append(question1)
+  question3 = $("<ul>" + questions[2].title + "</ul>");
+  $(".Quiz").append(question3)
   
   answersC1 = $("<li>" + questions[2].choices[0] + "</li>");
   answersC2 = $("<li>" + questions[2].choices[1] + "</li>");
@@ -144,35 +208,190 @@ function thirdQuestionFun() {
   $(".Quiz").append(answersC2)
   $(".Quiz").append(answersC3)
   $(".Quiz").append(answersC4)
-  $("ul").addClass("list-group card-header text-center border-dark");
-$("li").addClass("list-group-item btn");
+
 $("li").addClass("choices");
 
 
-$("li").on("click", function secondQuestionFun2(a) {
-  console.log(secondQuestionFun2)
+$("li").on("click", function thirdQuestionFun2(a) {
+  
   
   if (a.target.textContent === questions[2].answer)
   
   {
+    correctA.play();
     alert("Correct")
-    finalScore+= 15;
-    console.log(finalScore);
+    if (secondsElapsed < 10) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 12) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 15) {
+      finalScore+= 5;
+    }
     $(".Quiz").text("")
-    //  thirdQuestionFun();
+    fourthQuestionFun();
   }
   
   else {
+    inCorrectA.play();
     alert("Incorrect");
     $(".Quiz").text("")
-    // thirdQuestionFun();
+    fourthQuestionFun();
     
 
   
   }
 }
 
-)}
+)};
+
+function fourthQuestionFun() {
+  
+  question4 = $("<ul>" + questions[3].title + "</ul>");
+  $(".Quiz").append(question4)
+  
+  answersD1 = $("<li>" + questions[3].choices[0] + "</li>");
+  answersD2 = $("<li>" + questions[3].choices[1] + "</li>");
+  answersD3 = $("<li>" + questions[3].choices[2] + "</li>");
+  answersD4 = $("<li>" + questions[3].choices[3] + "</li>");
+  $(".Quiz").append(answersD1)
+  $(".Quiz").append(answersD2)
+  $(".Quiz").append(answersD3)
+  $(".Quiz").append(answersD4)
+
+$("li").addClass("choices");
+
+
+$("li").on("click", function fourthQuestionFun2(a) {
+  
+  
+  if (a.target.textContent === questions[3].answer)
+  
+  {
+    correctA.play();
+    alert("Correct")
+    if (secondsElapsed < 10) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 12) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 15) {
+      finalScore+= 5;
+    }
+    console.log(finalScore)
+    $(".Quiz").text("")
+    fifthQuestionFun();
+  }
+  
+  else {
+    inCorrectA.play();
+    alert("Incorrect");
+    $(".Quiz").text("")
+    fifthQuestionFun();
+    
+
+  
+  }
+}
+
+)};
+
+function fifthQuestionFun() {
+  
+  question5 = $("<ul>" + questions[4].title + "</ul>");
+  $(".Quiz").append(question5)
+  
+  answersE1 = $("<li>" + questions[4].choices[0] + "</li>");
+  answersE2 = $("<li>" + questions[4].choices[1] + "</li>");
+  answersE3 = $("<li>" + questions[4].choices[2] + "</li>");
+  answersE4 = $("<li>" + questions[4].choices[3] + "</li>");
+  $(".Quiz").append(answersE1)
+  $(".Quiz").append(answersE2)
+  $(".Quiz").append(answersE3)
+  $(".Quiz").append(answersE4)
+ 
+$("li").addClass("choices");
+
+$("li").on("click", function fifthQuestionFun2(a) {
+ 
+  
+  if (a.target.textContent === questions[4].answer)
+  
+  {
+    
+    if (secondsElapsed < 10) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 12) {
+      finalScore+= 5;
+    }
+    if (secondsElapsed < 15) {
+      finalScore+= 5;
+    }
+    correctA.play();
+    alert("Correct")
+   
+    $(".Quiz").text("");
+    gameOver.play();
+    finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
+    initialHighScores = $(`<input class="form-control submitScore" type="text" placeholder="Your initials please">`)
+    submitScoreButton = $(`<button type="button" class="btn btn-primary btn-sm">Small button</button>`)
+    $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
+    // $(".Quiz").append(initialHighScores)
+    
+  //  $(".submitScore").on("submit", function() {
+  //   submitScoreInt = document.getElementsByClassName("submitScore").textContent
+  //   console.log(submitScoreInt)
+    highScoresList();
+  // })
+  
+  
+  }
+  
+  else {
+    inCorrectA.play();
+    alert("Incorrect");
+    $(".Quiz").text("");
+    gameOver.play();
+    finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
+    initialHighScores = $(`<input class="form-control" type="text" placeholder="Your initials please">`)
+    submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
+    $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
+  
+    
+   $(".submitScore").on("click", function() {
+    submitScoreInt = document.getElementsByClassName("submitScore").textContent
+    console.log(submitScoreInt)
+    highScoresList();
+  })
+    
+   
+    
+
+  
+  }
+  
+}
+
+
+
+)};
+
+
+function highScoresList () {
+  localStorage.setItem(
+    "highScores",
+    JSON.stringify({
+      highScores: finalScore
+    })
+  );
+}
+
+
+clearInterval(timesUp);
+timesUp = 0;
 
 
 

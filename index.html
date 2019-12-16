@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-  
+  <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
 
 
 </head>
@@ -22,11 +22,14 @@
     <!-- View Highscores and Time -->
     
     <div class = "row">
-            <div class= "col-sm-6 text-left p-3"><button type="button" class="btn btn-link">View Highscores</button></div>
-            <span class = "col-sm-6 mt-3 text-right">Time = <span id="time">0</span></span>
+            <div class= "col-sm-6 text-left p-3"><button type="button" class="btn btn-link" id="high">View Highscores</button></div>
+            <span class = "col-sm-6 mt-3 text-right">Time = <span id="time">75</span></span>
             </div>  
 
+<div class="row">
+<div class="col-sm-6" id="highScoreDiv1"></div>
 
+</div>
     <!-- Quiz -->
 
     <div class="Quiz"></div>
@@ -36,7 +39,7 @@
     <div class="row p-2 m-2" id="header">
            
             <div class ="col-sm-4"></div>
-            <div class = "col-sm-4 text-center jumbotron h1 font-weight-bold">Capital Challenge</div>
+            <div class = "col-sm-4 text-center h1 font-weight-bold border border-dark" id="background">Capital Challenge</div>
             <div class ="col-sm-4"></div>
 
     </div>
@@ -46,8 +49,8 @@
     <div class="row" id="description">
            
             <div class ="col-sm-2"></div>
-            <div class = "col-sm-8 text-center mt-5 display-5 font-weight-bold">
-                You will have 75 seconds to answer 5 questions. If you get the answer wrong, 10 seconds will be deducted
+            <div class = "col-sm-8 text-center mt-5 display-5 font-weight-bold" id="background">
+                You will have 75 seconds to answer 5 questions. If you get the answer wrong, 15 seconds will be deducted
                 from your total time. Good luck!
             </div>
             <div class ="col-sm-2"></div>
