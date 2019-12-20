@@ -34,14 +34,18 @@ inCorrectA.setAttribute("src", "smw_blargg.wav");
 var gameOver = document.createElement("audio");
 gameOver.setAttribute("src", "gameover.wav");
 // var b = document.body.querySelector("#time").textContent;
-
-
-console.log(finalScore)
+var timesUp;
+timePenalty = 0;
+totalSeconds = 75 
+secondsElapsed = 0;
+// finalScoreArray = []; 
+// finalScoreArray.push(finalScore.valueOf());
 
 function highScoresList () {
+
   localStorage.setItem(
-    "highScores",
-  
+    "highScoreTotal",
+
     JSON.stringify({
      highScores: finalScore
       
@@ -52,7 +56,7 @@ function highScoresList () {
 
 function submitScoreIntList () {
   localStorage.setItem(
-    "initials",
+    "initialsTotal",
   
     JSON.stringify({
       initials: submitScoreInt
@@ -64,8 +68,9 @@ function submitScoreIntList () {
 
 
 $("button").on("click", function () {
-  var highScoresList = localStorage.getItem("highScores");
-var submitScore = localStorage.getItem("initials");
+  
+  var highScoresList = localStorage.getItem("highScoreTotal");
+var submitScore = localStorage.getItem("initialsTotal");
   highScoreDiv = $("<div>" + highScoresList + "<span>" +submitScore +  "</span>" +  "</div>") 
   $("#highScoreDiv1").append(highScoreDiv)
   $("#high").addClass("disabled")
@@ -78,12 +83,20 @@ console.log(highScoresList)
 
 
 
+
+
+
+ 
+
+
+
+
+
 $("#quizButton").on("click", function() {
+  
+  
   function countDown() {
-    var timesUp;
-    totalSeconds = 75;
-    secondsElapsed = 0;
-    timePenalty = 15;
+
     var timesUp = setInterval(function () {
       var secondsLeft = totalSeconds - secondsElapsed
         $("#time").text(secondsLeft);
@@ -100,6 +113,8 @@ $("#quizButton").on("click", function() {
         submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
         $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
       
+          
+  
         
        $(".submitScore").on("click", function() {
         
@@ -112,19 +127,10 @@ $("#quizButton").on("click", function() {
         $("#quizButton").removeClass("d-none");
         })
        
-    
-      
-      
-      
-    
-      
-    
-    
         }
     }, 1000);
   }
-  
-      
+  console.log(finalScore) 
     
   
   $( "#header" ).addClass("d-none");
@@ -173,7 +179,7 @@ console.log(finalScore)
   else {
     inCorrectA.play();
     alert("Incorrect");
- 
+    secondsElapsed = secondsElapsed + 15
     $(".Quiz").text("")
     secondQuestionFun();
 
@@ -181,6 +187,7 @@ console.log(finalScore)
 
   
 });
+
 function secondQuestionFun() {
 
   question2 = $("<ul>" + questions[1].title + "</ul>");
@@ -223,11 +230,9 @@ $("li").on("click", function secondQuestionFun2(a) {
   else {
     inCorrectA.play();
     alert("Incorrect"); 
-    
+    secondsElapsed = secondsElapsed + 15
     $(".Quiz").text("")
     thirdQuestionFun();
-    
-
   
   }
 }
@@ -275,6 +280,7 @@ $("li").on("click", function thirdQuestionFun2(a) {
   else {
     inCorrectA.play();
     alert("Incorrect");
+    secondsElapsed = secondsElapsed + 15
     $(".Quiz").text("")
     fourthQuestionFun();
     
@@ -327,11 +333,10 @@ $("li").on("click", function fourthQuestionFun2(a) {
   else {
     inCorrectA.play();
     alert("Incorrect");
+    secondsElapsed = secondsElapsed + 15
     $(".Quiz").text("")
     fifthQuestionFun();
-    
 
-  
   }
 }
 
@@ -379,16 +384,11 @@ $("li").on("click", function fifthQuestionFun2(a) {
     submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
     $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
   
-    
-   
-    
-
-  
-  
   }
   
   else {
     inCorrectA.play();
+    secondsElapsed = 75
     alert("Incorrect");
     $(".Quiz").text("");
     gameOver.play();
@@ -396,13 +396,7 @@ $("li").on("click", function fifthQuestionFun2(a) {
     initialHighScores = $(`<input class="form-control initials" type="text" placeholder="Your initials please">`)
     submitScoreButton = $(`<button type="button" class=" submitScore btn btn-primary btn-sm">Submit</button>`)
     $(".Quiz").append(finalScoreDiv, initialHighScores, submitScoreButton);
-  
-    
-   
-
-    
-
-  
+ 
   }
   $(".submitScore").on("click", function() {
    
@@ -419,63 +413,7 @@ $("li").on("click", function fifthQuestionFun2(a) {
     })
 }
 
-
-
 )};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(".Quiz").append
-//   $.each(questions  , function(i, question) {
-//     questionTitleDiv = $("<ul>" + question.title + "<li>" + question.choices[0] +"</li>" + "<li>" + question.choices[1] + "<li>" + question.choices[2] + "<li>" + question.choices[3] +"</li>"+"</li>" +"</li>" +"</ul>")
-//     $(".Quiz").append(questionTitleDiv);
-   
-//     $("ul").addClass("list-group card-header text-center border-dark");
-//     $("li").addClass("list-group-item");
-//     $("li").addClass("choices");
-//     $("ul:nth-child(n+2)").addClass("d-none");
-  
-//     $(".list-group-item").on("click", function (p)
-//     { 
-//       correctAnswer = p.target.textContent;
-    
-     
-    
-//     });
-    
-//     function countDown(b) {
-//       var int = setInterval(function () {
-//           $("#time").text(b);
-//           b-- || clearInterval(int);  //if i is 0, then stop the interval
-//       }, 1000);
-//   }
-//   countDown(75);
-//     });
-
-
-
-
-
-
 });
 
 
@@ -491,5 +429,5 @@ $("li").on("click", function fifthQuestionFun2(a) {
 
 
 
-    ///etc.
+
   
