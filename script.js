@@ -125,6 +125,7 @@ $("#quizButton").on("click", function() {
         $( "#header" ).removeClass("d-none");
         $( "#description" ).removeClass("d-none");
         $("#quizButton").removeClass("d-none");
+        location.reload();
         })
        
         }
