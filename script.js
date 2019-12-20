@@ -376,7 +376,7 @@ $("li").on("click", function fifthQuestionFun2(a) {
     }
     correctA.play();
     alert("Correct")
-    secondsElapsed = 75
+   
     $(".Quiz").text("");
     gameOver.play();
     finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
@@ -388,7 +388,6 @@ $("li").on("click", function fifthQuestionFun2(a) {
   
   else {
     inCorrectA.play();
-    secondsElapsed = 75
     alert("Incorrect");
     $(".Quiz").text("");
     gameOver.play();
@@ -408,7 +407,7 @@ $("li").on("click", function fifthQuestionFun2(a) {
     $( "#header" ).removeClass("d-none");
     $( "#description" ).removeClass("d-none");
     $("#quizButton").removeClass("d-none");
-  location.reload();
+   location.reload(); 
    
     })
 }
