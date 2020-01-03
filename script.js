@@ -27,6 +27,7 @@ var questions = [
     ];
 
 var finalScore = 0;
+
 var correctA = document.createElement("audio");
 correctA.setAttribute("src", "smw_1-up.wav");
 var inCorrectA = document.createElement("audio");
@@ -38,40 +39,27 @@ var timesUp;
 timePenalty = 0;
 totalSeconds = 75 
 secondsElapsed = 0;
-// finalScoreArray = []; 
-// finalScoreArray.push(finalScore.valueOf());
+
 
 function highScoresList () {
-
-  localStorage.setItem(
-    "highScoreTotal",
-
-    JSON.stringify({
-     highScores: finalScore
-      
-
-    })
-  );
-}
-
-function submitScoreIntList () {
-  localStorage.setItem(
-    "initialsTotal",
   
-    JSON.stringify({
-      initials: submitScoreInt
-      
-
-    })
-  );
+  
+  if (finalScore > localStorage.getItem('score')) { 
+  
+  localStorage.setItem("score", finalScore)
+  localStorage.setItem("initials", JSON.stringify(submitScoreInt))
 }
+
+
+    
+};
 
 
 $("button").on("click", function () {
   
-  var highScoresList = localStorage.getItem("highScoreTotal");
-var submitScore = localStorage.getItem("initialsTotal");
-  highScoreDiv = $("<div>" + highScoresList + "<span>" +submitScore +  "</span>" +  "</div>") 
+  var highScoresList = localStorage.getItem('score');
+var submitScore = localStorage.getItem('initials');
+  highScoreDiv = $("<div>" + "High score is " + highScoresList + " by : " + "<span>" +submitScore +  "</span>" +  "</div>") 
   $("#highScoreDiv1").append(highScoreDiv)
   $("#high").addClass("disabled")
 console.log(highScoresList)
@@ -119,7 +107,7 @@ $("#quizButton").on("click", function() {
        $(".submitScore").on("click", function() {
         
         submitScoreInt = document.querySelector(".initials").value
-        submitScoreIntList();
+        
         highScoresList();
         $(".Quiz").text("");
         $( "#header" ).removeClass("d-none");
@@ -165,10 +153,10 @@ $("li").on("click", function firstQuestionFun(a) {
     if (secondsElapsed < 10) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 12) {
+    if (secondsElapsed < 20) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 15) {
+    if (secondsElapsed < 30) {
       finalScore+= 5;
     }
 console.log(finalScore)
@@ -217,10 +205,10 @@ $("li").on("click", function secondQuestionFun2(a) {
     if (secondsElapsed < 10) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 12) {
+    if (secondsElapsed < 20) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 15) {
+    if (secondsElapsed < 30) {
       finalScore+= 5;
     }
     console.log(finalScore)
@@ -268,10 +256,10 @@ $("li").on("click", function thirdQuestionFun2(a) {
     if (secondsElapsed < 10) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 12) {
+    if (secondsElapsed < 20) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 15) {
+    if (secondsElapsed < 30) {
       finalScore+= 5;
     }
     $(".Quiz").text("")
@@ -320,10 +308,10 @@ $("li").on("click", function fourthQuestionFun2(a) {
     if (secondsElapsed < 10) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 12) {
+    if (secondsElapsed < 20) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 15) {
+    if (secondsElapsed < 30) {
       finalScore+= 5;
     }
     console.log(finalScore)
@@ -369,15 +357,15 @@ $("li").on("click", function fifthQuestionFun2(a) {
     if (secondsElapsed < 10) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 12) {
+    if (secondsElapsed < 20) {
       finalScore+= 5;
     }
-    if (secondsElapsed < 15) {
+    if (secondsElapsed < 30) {
       finalScore+= 5;
     }
     correctA.play();
     alert("Correct")
-   
+   secondsElapsed = 75;
     $(".Quiz").text("");
     gameOver.play();
     finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
@@ -390,6 +378,7 @@ $("li").on("click", function fifthQuestionFun2(a) {
   else {
     inCorrectA.play();
     alert("Incorrect");
+    secondsElapsed = 75;
     $(".Quiz").text("");
     gameOver.play();
     finalScoreDiv = $("<ul>").text("Your Final Score is " + finalScore + ' out of 75!');
@@ -401,7 +390,11 @@ $("li").on("click", function fifthQuestionFun2(a) {
   $(".submitScore").on("click", function() {
    
     submitScoreInt = document.querySelector(".initials").value
-    submitScoreIntList();
+    
+  
+   
+    
+
     highScoresList();
     alert("Now Back to the Main Menu");
     $(".Quiz").text("");
